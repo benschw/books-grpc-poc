@@ -81,4 +81,5 @@ Start a postgresql container with docker-compose
 - https://hashinteractive.com/blog/docker-compose-up-with-postgres-quick-tips/
 - https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/
 - https://github.com/rahmanfadhil/gin-bookstore
+- https://github.com/jackc/pgx/blob/master/examples/todo/main.go
 
