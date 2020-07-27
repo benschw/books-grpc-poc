@@ -54,26 +54,26 @@ Start a postgresql container with docker-compose
 	  ]
 	}}
 
-$ curl -X PUT localhost:8080/book/1 -d '{"title": "hello galaxy", "author": "benjamin schwartz"}'
-{"data":{"id":1,"title":"hello galaxy","author":"benjamin schwartz"}}
+	$ curl -X PUT localhost:8080/book/1 -d '{"title": "hello galaxy", "author": "benjamin schwartz"}'
+	{"data":{"id":1,"title":"hello galaxy","author":"benjamin schwartz"}}
 
-$ curl -X DELETE localhost:8080/book/2
+	$ curl -X DELETE localhost:8080/book/2
 
-$ curl -s localhost:8080/book | jq .
-{
-	"data": [
-		{
-			"id": 1,
-			"title": "hello galaxy",
-			"author": "benjamin schwartz"
-		},
-		{
-			"id": 3,
-			"title": "hello world",
-			"author": "ben schwartz"
-		}
-	]
-}}
+	$ curl -s localhost:8080/book | jq .
+	{
+		"data": [
+			{
+				"id": 1,
+				"title": "hello galaxy",
+				"author": "benjamin schwartz"
+			},
+			{
+				"id": 3,
+				"title": "hello world",
+				"author": "ben schwartz"
+			}
+		]
+	}}
 
 
 
