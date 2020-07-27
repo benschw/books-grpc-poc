@@ -61,18 +61,18 @@ Start a postgresql container with docker-compose
 
 	$ curl -s localhost:8080/book | jq .
 	{
-		"data": [
-			{
-				"id": 1,
-				"title": "hello galaxy",
-				"author": "benjamin schwartz"
-			},
-			{
-				"id": 3,
-				"title": "hello world",
-				"author": "ben schwartz"
-			}
-		]
+	  "data": [
+	    {
+	      "id": 1,
+	      "title": "hello galaxy",
+	      "author": "benjamin schwartz"
+	    },
+	    {
+	      "id": 3,
+	      "title": "hello world",
+	      "author": "ben schwartz"
+	    }
+	  ]
 	}}
 
 
