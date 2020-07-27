@@ -1,23 +1,22 @@
-package resources
+package app
 
 import (
 	"net/http"
 	"strconv"
 
-	"github.com/benschw/books-poc/api"
-	"github.com/benschw/books-poc/data"
+	"github.com/benschw/books-poc"
 	"github.com/gin-gonic/gin"
 )
 
 // BooksResource provides handlers for the Books Resource
 type BooksResource struct {
-	Repo *data.BooksRepo
+	repo books.Repo
 }
 
 // FindBooks finds all books
 // GET /books
 func (r *BooksResource) FindBooks(c *gin.Context) {
-	books, err := r.Repo.FindAll()
+	books, err := r.repo.FindAll()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -31,7 +30,7 @@ func (r *BooksResource) FindBooks(c *gin.Context) {
 func (r *BooksResource) FindBook(c *gin.Context) {
 	i, _ := strconv.ParseUint(c.Param("id"), 10, 64)
 
-	book, err := r.Repo.Find(i)
+	book, err := r.repo.Find(i)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
@@ -43,13 +42,13 @@ func (r *BooksResource) FindBook(c *gin.Context) {
 // CreateBook adds a new book
 // POST /books
 func (r *BooksResource) CreateBook(c *gin.Context) {
-	var input api.Book
+	var input books.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	created, err := r.Repo.Create(input)
+	created, err := r.repo.Create(input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -63,20 +62,20 @@ func (r *BooksResource) CreateBook(c *gin.Context) {
 func (r *BooksResource) UpdateBook(c *gin.Context) {
 	i, _ := strconv.ParseUint(c.Param("id"), 10, 64)
 
-	found, err := r.Repo.Find(i)
+	found, err := r.repo.Find(i)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
-	var input api.Book
+	var input books.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	input.ID = found.ID
 
-	updated, err := r.Repo.Update(input)
+	updated, err := r.repo.Update(input)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -90,13 +89,13 @@ func (r *BooksResource) UpdateBook(c *gin.Context) {
 func (r *BooksResource) DeleteBook(c *gin.Context) {
 	i, _ := strconv.ParseUint(c.Param("id"), 10, 64)
 
-	_, err := r.Repo.Find(i)
+	_, err := r.repo.Find(i)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
-	err = r.Repo.Delete(i)
+	err = r.repo.Delete(i)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
