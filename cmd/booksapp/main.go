@@ -10,8 +10,7 @@ import (
 
 func main() {
 
-	//dbStr := os.Getenv("DATABASE_URL")
-	dbStr := "postgres://docker:docker@localhost:5400/books"
+	dbStr := os.Getenv("DATABASE_URL")
 
 	repo, err := postgres.NewRepo(dbStr)
 	if err != nil {

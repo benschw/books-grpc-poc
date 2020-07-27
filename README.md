@@ -17,8 +17,9 @@ https://github.com/benschw/books-ui-poc
 ## Run the service
 build & run the app
 
+	cd cmd/booksapp
 	go build
-	./books-poc
+	DATABASE_URL=postgres://docker:docker@localhost:5400/books ./booksapp
 
 ## Interact with the API
 
