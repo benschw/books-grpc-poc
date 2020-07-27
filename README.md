@@ -1,22 +1,10 @@
 
 
 ## db
-
-- postgres.conf - postgresql config 
-	- harvest with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
-- schema.sql - initial schema to work with
-
 Start a postgresql container with docker-compose
 
-
-	# start the container
 	docker-compose up -d
 
-	# stop the container
-	docker-compose down
-
-	# connect to the container
-	psql -h localhost -p 5400 -U docker postgres
 
 ## Run the UI 
 https://github.com/benschw/books-ui-poc
@@ -27,6 +15,7 @@ https://github.com/benschw/books-ui-poc
 	yarn start
 
 ## Run the service
+build & run the app
 
 	go build
 	./books-poc
@@ -86,7 +75,14 @@ https://github.com/benschw/books-ui-poc
 
 
 
-## Reference Links
+## Notes
+- postgres.conf
+	- postgresql config harvest with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
+- schema.sql
+	- initial schema to work with - (implement migrations?)
+- once running...
+	- connect with cli: `psql -h localhost -p 5400 -U docker postgres`
+
 - https://hashinteractive.com/blog/docker-compose-up-with-postgres-quick-tips/
 - https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/
 - https://github.com/rahmanfadhil/gin-bookstore
