@@ -18,7 +18,7 @@ Start a postgresql container with docker-compose
 	# connect to the container
 	psql -h localhost -p 5400 -U docker postgres
 
-## run the UI 
+## Run the UI 
 https://github.com/benschw/books-ui-poc
 (this will proxy API requests to localhost:8080 to match the below default service usage)
 
