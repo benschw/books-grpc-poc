@@ -1,16 +1,17 @@
 ## db
 
-- postgres.conf - postgresql config (harvest with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`)
+- postgres.conf - postgresql config 
+	- harvest with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
 - schema.sql - initial schema to work with
 
 
-	# start the contianer
+	// start the contianer
 	docker-compose up -d
 
-	# stop the container
+	// stop the container
 	docker-compose down
 
-	# connect to the container
+	// connect to the container
 	psql -h localhost -p 5400 -U docker postgres
 
 
