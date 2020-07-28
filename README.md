@@ -80,9 +80,9 @@ https://github.com/benschw/books-ui-poc
 
 ## Notes
 - postgres.conf
-	- postgresql config harvest with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
+	- harvest postgresql config with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
 - schema.sql
-	- initial schema to work with - (implement migrations?)
+	- initial schema to work with
 - once running...
 	- connect to db with cli: `psql -h localhost -p 5400 -U docker postgres`
 
