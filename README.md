@@ -80,7 +80,7 @@ https://github.com/benschw/books-ui-poc
 
 ## Notes
 - postgres.conf
-	- harvest postgresql config with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
+	- harvest postgres config with `docker run -i --rm postgres cat /usr/share/postgresql/postgresql.conf.sample > postgres.conf`
 - schema.sql
 	- initial schema to work with
 - once running...
