@@ -1,0 +1,76 @@
+package fakes
+
+import (
+	"fmt"
+
+	"github.com/benschw/books-poc/internal"
+	"github.com/benschw/books-poc/models"
+)
+
+// Ensure Repo implements internal.BooksRepo.
+var _ internal.Repo = &Repo{}
+
+// Repo manages fake database access for books
+type Repo struct {
+	i     uint64
+	Books []models.Book
+}
+
+// NewRepo creates a new postgres repo
+func NewRepo() *Repo {
+
+	return &Repo{i: 0, Books: []models.Book{}}
+}
+
+// FindAll returns all books from the database
+func (r *Repo) FindAll() ([]models.Book, error) {
+	return r.Books, nil
+}
+
+// Find selects one book by id from the database
+func (r *Repo) Find(id uint64) (models.Book, error) {
+	var book models.Book
+
+	for _, b := range r.Books {
+		if b.ID == id {
+			return b, nil
+		}
+	}
+	return book, fmt.Errorf("not found")
+}
+
+// Create adds a new book to the databases
+func (r *Repo) Create(book models.Book) (models.Book, error) {
+	r.i = r.i + 1
+	book.ID = r.i
+	r.Books = append(r.Books, book)
+	return book, nil
+}
+
+// Update updates an existing record in the database
+func (r *Repo) Update(book models.Book) (models.Book, error) {
+	for i, b := range r.Books {
+		if b.ID == book.ID {
+			r.Books[i].Title = book.Title
+			r.Books[i].Author = book.Author
+			return book, nil
+		}
+	}
+
+	return book, fmt.Errorf("not found")
+}
+
+// Delete deletes a record in the database
+func (r *Repo) Delete(id uint64) error {
+
+	for i, b := range r.Books {
+		if b.ID == id {
+			// Remove the element at index i from a.
+			copy(r.Books[i:], r.Books[i+1:])   // Shift a[i+1:] left one index.
+			r.Books = r.Books[:len(r.Books)-1] // Truncate slice.
+			return nil
+		}
+	}
+
+	return fmt.Errorf("not found")
+}

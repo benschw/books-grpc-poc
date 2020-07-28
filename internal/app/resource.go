@@ -4,13 +4,14 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/benschw/books-poc"
+	"github.com/benschw/books-poc/internal"
+	"github.com/benschw/books-poc/models"
 	"github.com/gin-gonic/gin"
 )
 
 // BooksResource provides handlers for the Books Resource
 type BooksResource struct {
-	repo books.Repo
+	repo internal.Repo
 }
 
 // FindBooks finds all books
@@ -42,7 +43,7 @@ func (r *BooksResource) FindBook(c *gin.Context) {
 // CreateBook adds a new book
 // POST /books
 func (r *BooksResource) CreateBook(c *gin.Context) {
-	var input books.Book
+	var input models.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -68,7 +69,7 @@ func (r *BooksResource) UpdateBook(c *gin.Context) {
 		return
 	}
 
-	var input books.Book
+	var input models.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

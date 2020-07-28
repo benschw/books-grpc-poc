@@ -1,4 +1,4 @@
-package api
+package models
 
 // Book model for JSON api
 type Book struct {

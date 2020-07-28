@@ -1,4 +1,8 @@
+## TODO
 
+- database migrations instead of fixture schema
+- user input validation
+- test postgres repo
 
 ## db
 Start a postgresql container with docker-compose
@@ -15,11 +19,10 @@ https://github.com/benschw/books-ui-poc
 	yarn start
 
 ## Run the service
-build & run the app
+build & run the app (or test with `go test ./...`)
 
-	cd cmd/booksapp
 	go build
-	DATABASE_URL=postgres://docker:docker@localhost:5400/books ./booksapp
+	DATABASE_URL=postgres://docker:docker@localhost:5400/books ./books-poc
 
 ## Interact with the API
 
