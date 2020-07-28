@@ -5,9 +5,7 @@
 - test postgres repo
 
 
-
 ## Run the App
-Get the app running locally
 
 	# build (for linux since it will be running inside a docker container)
 	GOOS=linux GOARCH=amd64 go build
@@ -86,7 +84,7 @@ https://github.com/benschw/books-ui-poc
 - schema.sql
 	- initial schema to work with - (implement migrations?)
 - once running...
-	- connect with cli: `psql -h localhost -p 5400 -U docker postgres`
+	- connect to db with cli: `psql -h localhost -p 5400 -U docker postgres`
 
 - https://hashinteractive.com/blog/docker-compose-up-with-postgres-quick-tips/
 - https://blog.logrocket.com/how-to-build-a-rest-api-with-golang-using-gin-and-gorm/
