@@ -4,9 +4,15 @@
 - user input validation
 - test postgres repo
 
-## db
-Start a postgresql container with docker-compose
 
+
+## Run the App
+Get the app running locally
+
+	# build (for linux since it will be running inside a docker container)
+	GOOS=linux GOARCH=amd64 go build
+
+	# Start a postgres server & the app with docker-compose
 	docker-compose up -d
 
 
@@ -18,11 +24,6 @@ https://github.com/benschw/books-ui-poc
 	cd books-ui-poc
 	yarn start
 
-## Run the service
-build & run the app (or test with `go test ./...`)
-
-	go build
-	DATABASE_URL=postgres://docker:docker@localhost:5400/books ./books-poc
 
 ## Interact with the API
 

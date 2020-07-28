@@ -3,7 +3,7 @@ version: '3'
 services:
   postgresql:
     image: postgres
-    container_name: pg-docker
+    container_name: postgres
     ports:
       - "5400:5432"
     environment:
@@ -13,4 +13,15 @@ services:
       - ./postgres.conf:/etc/postgresql/postgresql.conf
       - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
     command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    restart: always
+  books:
+    image: golang
+    container_name: books
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://docker:docker@postgres:5432/books
+    volumes:
+      - ./books-poc:/books-poc
+    command: /books-poc
     restart: always
