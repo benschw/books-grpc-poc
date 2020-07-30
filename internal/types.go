@@ -1,12 +1,12 @@
 package internal
 
-import "github.com/benschw/books-poc/models"
+import "github.com/benschw/books-poc/books"
 
 // Repo manages book persistence
 type Repo interface {
-	FindAll() ([]models.Book, error)
-	Find(id uint64) (models.Book, error)
-	Create(book models.Book) (models.Book, error)
-	Update(book models.Book) (models.Book, error)
+	FindAll() ([]books.Book, error)
+	Find(id uint64) (books.Book, error)
+	Create(book books.Book) (books.Book, error)
+	Update(book books.Book) (books.Book, error)
 	Delete(id uint64) error
 }

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/benschw/books-poc/books"
 	"github.com/benschw/books-poc/internal"
-	"github.com/benschw/books-poc/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -43,7 +43,7 @@ func (r *BooksResource) FindBook(c *gin.Context) {
 // CreateBook adds a new book
 // POST /books
 func (r *BooksResource) CreateBook(c *gin.Context) {
-	var input models.Book
+	var input books.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -69,7 +69,7 @@ func (r *BooksResource) UpdateBook(c *gin.Context) {
 		return
 	}
 
-	var input models.Book
+	var input books.Book
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

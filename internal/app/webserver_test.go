@@ -8,19 +8,19 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/benschw/books-poc/books"
 	"github.com/benschw/books-poc/internal/fakes"
-	"github.com/benschw/books-poc/models"
 	"github.com/stretchr/testify/assert"
 )
 
-var input []models.Book = []models.Book{
-	models.Book{Title: "hello world", Author: "Ben"},
-	models.Book{Title: "hello galaxy", Author: "Schwartz"},
+var input []books.Book = []books.Book{
+	books.Book{Title: "hello world", Author: "Ben"},
+	books.Book{Title: "hello galaxy", Author: "Schwartz"},
 }
 
-var expected []models.Book = []models.Book{
-	models.Book{ID: 1, Title: "hello world", Author: "Ben"},
-	models.Book{ID: 2, Title: "hello galaxy", Author: "Schwartz"},
+var expected []books.Book = []books.Book{
+	books.Book{ID: 1, Title: "hello world", Author: "Ben"},
+	books.Book{ID: 2, Title: "hello galaxy", Author: "Schwartz"},
 }
 
 func fakeRequest(r *WebServer, method string, path string, body io.Reader) *httptest.ResponseRecorder {
@@ -44,7 +44,7 @@ func TestFindAllBooks(t *testing.T) {
 	// then
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	var response map[string][]models.Book
+	var response map[string][]books.Book
 	err := json.Unmarshal([]byte(w.Body.String()), &response)
 
 	books, exists := response["data"]
@@ -72,7 +72,7 @@ func TestCreateBook(t *testing.T) {
 	// then
 	assert.Equal(t, http.StatusCreated, w.Code)
 
-	var response map[string]models.Book
+	var response map[string]books.Book
 	err := json.Unmarshal([]byte(w.Body.String()), &response)
 
 	book, exists := response["data"]
@@ -101,7 +101,7 @@ func TestFindBook(t *testing.T) {
 	// then
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	var response map[string]models.Book
+	var response map[string]books.Book
 	err := json.Unmarshal([]byte(w.Body.String()), &response)
 
 	book, exists := response["data"]
@@ -139,7 +139,7 @@ func TestUpdateBook(t *testing.T) {
 	// then
 	assert.Equal(t, http.StatusOK, w.Code)
 
-	var response map[string]models.Book
+	var response map[string]books.Book
 	err := json.Unmarshal([]byte(w.Body.String()), &response)
 
 	book, exists := response["data"]
@@ -171,7 +171,7 @@ func TestUpdateBook_NotFound(t *testing.T) {
 func TestDeleteBook(t *testing.T) {
 	// given
 	repo := fakes.NewRepo()
-	repo.Create(models.Book{Title: "hello world", Author: "Ben"})
+	repo.Create(input[0])
 
 	webApp := NewWebServer(repo)
 

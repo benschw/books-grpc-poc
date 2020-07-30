@@ -3,8 +3,8 @@ package postgres
 import (
 	"context"
 
+	"github.com/benschw/books-poc/books"
 	"github.com/benschw/books-poc/internal"
-	"github.com/benschw/books-poc/models"
 	"github.com/jackc/pgx/v4"
 )
 
@@ -25,8 +25,8 @@ func NewRepo(dbStr string) (*Repo, error) {
 }
 
 // FindAll returns all books from the database
-func (r *Repo) FindAll() ([]models.Book, error) {
-	var bs []models.Book
+func (r *Repo) FindAll() ([]books.Book, error) {
+	var bs []books.Book
 
 	rows, _ := r.conn.Query(context.Background(), "select * from books order by id")
 
@@ -38,7 +38,7 @@ func (r *Repo) FindAll() ([]models.Book, error) {
 		if err != nil {
 			return bs, err
 		}
-		bs = append(bs, models.Book{
+		bs = append(bs, books.Book{
 			ID:     id,
 			Title:  title,
 			Author: author,
@@ -51,8 +51,8 @@ func (r *Repo) FindAll() ([]models.Book, error) {
 }
 
 // Find selects one book by id from the database
-func (r *Repo) Find(id uint64) (models.Book, error) {
-	var book models.Book
+func (r *Repo) Find(id uint64) (books.Book, error) {
+	var book books.Book
 	row := r.conn.QueryRow(context.Background(), "select title, author from books where id = $1", id)
 
 	var title string
@@ -62,7 +62,7 @@ func (r *Repo) Find(id uint64) (models.Book, error) {
 	if err != nil {
 		return book, err
 	}
-	book = models.Book{
+	book = books.Book{
 		ID:     id,
 		Title:  title,
 		Author: author,
@@ -71,7 +71,7 @@ func (r *Repo) Find(id uint64) (models.Book, error) {
 }
 
 // Create adds a new book to the databases
-func (r *Repo) Create(book models.Book) (models.Book, error) {
+func (r *Repo) Create(book books.Book) (books.Book, error) {
 	row := r.conn.QueryRow(context.Background(), "insert into books(title, author) values($1, $2) RETURNING id", book.Title, book.Author)
 
 	var id uint64
@@ -84,7 +84,7 @@ func (r *Repo) Create(book models.Book) (models.Book, error) {
 }
 
 // Update updates an existing record in the database
-func (r *Repo) Update(book models.Book) (models.Book, error) {
+func (r *Repo) Update(book books.Book) (books.Book, error) {
 	_, err := r.conn.Exec(context.Background(), "update books set title=$1, author=$2 where id=$3", book.Title, book.Author, book.ID)
 
 	return book, err
