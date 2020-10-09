@@ -16,12 +16,12 @@ services:
     restart: always
   books:
     image: golang
-    container_name: books
+    container_name: books_old
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=postgres://docker:docker@postgres:5432/books
+      - DATABASE_URL=postgres://docker:docker@postgres:5432/books_old
     volumes:
-      - ./books-poc:/books-poc
-    command: /books-poc
+      - ./books_old-poc:/books_old-poc
+    command: /books_old-poc
     restart: always

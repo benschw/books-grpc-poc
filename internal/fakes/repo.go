@@ -2,37 +2,37 @@ package fakes
 
 import (
 	"fmt"
+	"github.com/benschw/books-grpc-poc/pkg/pb/books"
 
-	"github.com/benschw/books-poc/books"
-	"github.com/benschw/books-poc/internal"
+	"github.com/benschw/books-grpc-poc/internal"
 )
 
 // Ensure Repo implements internal.BooksRepo.
 var _ internal.Repo = &Repo{}
 
-// Repo manages fake database access for books
+// Repo manages fake database access for books_old
 type Repo struct {
 	i     uint64
-	Books []books.Book
+	Books []*books.Book
 }
 
 // NewRepo creates a new postgres repo
 func NewRepo() *Repo {
 
-	return &Repo{i: 0, Books: []books.Book{}}
+	return &Repo{i: 0, Books: []*books.Book{}}
 }
 
-// FindAll returns all books from the database
-func (r *Repo) FindAll() ([]books.Book, error) {
+// FindAll returns all books_old from the database
+func (r *Repo) FindAll() ([]*books.Book, error) {
 	return r.Books, nil
 }
 
 // Find selects one book by id from the database
-func (r *Repo) Find(id uint64) (books.Book, error) {
-	var book books.Book
+func (r *Repo) Find(id uint64) (*books.Book, error) {
+	var book *books.Book
 
 	for _, b := range r.Books {
-		if b.ID == id {
+		if b.Id == id {
 			return b, nil
 		}
 	}
@@ -40,17 +40,17 @@ func (r *Repo) Find(id uint64) (books.Book, error) {
 }
 
 // Create adds a new book to the databases
-func (r *Repo) Create(book books.Book) (books.Book, error) {
+func (r *Repo) Create(book *books.Book) (*books.Book, error) {
 	r.i = r.i + 1
-	book.ID = r.i
+	book.Id = r.i
 	r.Books = append(r.Books, book)
 	return book, nil
 }
 
 // Update updates an existing record in the database
-func (r *Repo) Update(book books.Book) (books.Book, error) {
+func (r *Repo) Update(book *books.Book) (*books.Book, error) {
 	for i, b := range r.Books {
-		if b.ID == book.ID {
+		if b.Id == book.Id {
 			r.Books[i].Title = book.Title
 			r.Books[i].Author = book.Author
 			return book, nil
@@ -64,7 +64,7 @@ func (r *Repo) Update(book books.Book) (books.Book, error) {
 func (r *Repo) Delete(id uint64) error {
 
 	for i, b := range r.Books {
-		if b.ID == id {
+		if b.Id == id {
 			// Remove the element at index i from a.
 			copy(r.Books[i:], r.Books[i+1:])   // Shift a[i+1:] left one index.
 			r.Books = r.Books[:len(r.Books)-1] // Truncate slice.

@@ -1,4 +1,5 @@
 ## TODO
+https://www.grpc.io/docs/languages/go/basics/
 
 - database migrations instead of fixture schema
 - user input validation

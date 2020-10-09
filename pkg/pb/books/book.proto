@@ -1,0 +1,26 @@
+syntax = "proto3";
+package books;
+
+option go_package = ".;books";
+
+
+message Book {
+  uint64 id = 1;
+  string title = 2;
+  string author = 3;
+}
+
+message BookQuery {
+  uint64 id = 1;
+  string author = 2;
+}
+
+message BookCollectionQuery {
+  string author = 1;
+}
+
+service BookService {
+  rpc FindBook(BookQuery) returns (Book) {}
+  rpc FindAllBooks(BookCollectionQuery) returns (stream Book) {}
+  rpc AddBook(Book) returns (Book) {}
+}
