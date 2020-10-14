@@ -18,32 +18,6 @@ var (
 	title = flag.String("title", "", "title value for adding a book")
 )
 
-func Add(c books.BookServiceClient, author string, title string) error {
-	book, err := c.AddBook(context.Background(), &books.Book{Author: author, Title: title})
-	if err != nil {
-		return err
-	}
-	fmt.Printf("Book Added: %v\n", book)
-	return nil
-}
-
-func List(c books.BookServiceClient, author string) error {
-	bookStream, err := c.FindAllBooks(context.Background(), &books.BookQuery{Author: author})
-	if err != nil {
-		return err
-	}
-	for {
-		book, err := bookStream.Recv()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return err
-		}
-		fmt.Printf("%v\n", book)
-	}
-	return nil
-}
 
 func main() {
 
@@ -72,4 +46,31 @@ func main() {
 	default:
 		log.Fatalf("unknown command: %s", *cmd)
 	}
+}
+
+func Add(c books.BookServiceClient, author string, title string) error {
+	book, err := c.AddBook(context.Background(), &books.Book{Author: author, Title: title})
+	if err != nil {
+		return err
+	}
+	fmt.Printf("Book Added: %v\n", book)
+	return nil
+}
+
+func List(c books.BookServiceClient, author string) error {
+	bookStream, err := c.FindAllBooks(context.Background(), &books.BookQuery{Author: author})
+	if err != nil {
+		return err
+	}
+	for {
+		book, err := bookStream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return err
+		}
+		fmt.Printf("%v\n", book)
+	}
+	return nil
 }
