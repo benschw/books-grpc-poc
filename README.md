@@ -9,12 +9,12 @@ In one terminal run the server:
 
 In another, test it out with the client:
 
-    ./books-grpc-poc-client -cmd add -title "Hello World1" -author "Bob Loblaw"
-    2020/10/14 09:58:40 AddBook: id:1 title:"Hello World1" author:"Bob Loblaw"
+    ./books-grpc-poc-client -cmd add -title "Hello World" -author "Bob Loblaw"
+    Book Added: id:1  title:"Hello World"  author:"Bob Loblaw"
 
-    ./books-grpc-poc-client -cmd add -title "Hello World2" -author "Bob Loblaw"
-    2020/10/14 09:58:43 AddBook: id:2 title:"Hello World2" author:"Bob Loblaw"
+    ./books-grpc-poc-client -cmd add -title "Hello World 2" -author "Bob Loblaw"
+    Book Added: id:2  title:"Hello World 2"  author:"Bob Loblaw"
 
     ./books-grpc-poc-client -cmd list
-    2020/10/14 09:58:47 FindAllBooks: id:1 title:"Hello World1" author:"Bob Loblaw"
-    2020/10/14 09:58:47 FindAllBooks: id:2 title:"Hello World2" author:"Bob Loblaw"
+    id:1  title:"Hello World"  author:"Bob Loblaw"
+    id:2  title:"Hello World 2"  author:"Bob Loblaw"

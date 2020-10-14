@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/benschw/books-grpc-poc/pkg/pb/books"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -22,7 +23,7 @@ func Add(c books.BookServiceClient, author string, title string) error {
 	if err != nil {
 		return err
 	}
-	log.Printf("AddBook: %v", book)
+	fmt.Printf("Book Added: %v\n", book)
 	return nil
 }
 
@@ -39,7 +40,7 @@ func List(c books.BookServiceClient, author string) error {
 		if err != nil {
 			return err
 		}
-		log.Printf("FindAllBooks: %v", book)
+		fmt.Printf("%v\n", book)
 	}
 	return nil
 }
