@@ -23,7 +23,16 @@ func NewRepo() *Repo {
 
 // FindAll returns all books_old from the database
 func (r *Repo) FindAll(query *books.BookQuery) ([]*books.Book, error) {
-	return r.Books, nil
+	if query.Author == "" {
+		return r.Books, nil
+	}
+	matches := []*books.Book{}
+	for _, book := range r.Books {
+		if book.Author == query.Author {
+			matches = append(matches, book)
+		}
+	}
+	return matches, nil
 }
 
 // Create adds a new book to the databases
