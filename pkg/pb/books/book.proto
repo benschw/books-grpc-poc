@@ -11,16 +11,11 @@ message Book {
 }
 
 message BookQuery {
-  uint64 id = 1;
   string author = 2;
 }
 
-message BookCollectionQuery {
-  string author = 1;
-}
 
 service BookService {
-  rpc FindBook(BookQuery) returns (Book) {}
-  rpc FindAllBooks(BookCollectionQuery) returns (stream Book) {}
   rpc AddBook(Book) returns (Book) {}
+  rpc FindAllBooks(BookQuery) returns (stream Book) {}
 }

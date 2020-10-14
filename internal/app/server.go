@@ -14,12 +14,12 @@ func NewServer(repo internal.Repo) *Server {
 	return &Server{repo: repo}
 }
 
-func (s *Server) FindBook(ctx context.Context, query *books.BookQuery) (*books.Book, error) {
-	return s.repo.Find(query.Id)
+func (s *Server) AddBook(ctx context.Context, new *books.Book) (*books.Book, error) {
+	return s.repo.Create(new)
 }
 
-func (s *Server) FindAllBooks(in *books.BookCollectionQuery, stream books.BookService_FindAllBooksServer) error {
-	books, err := s.repo.FindAll()
+func (s *Server) FindAllBooks(query *books.BookQuery, stream books.BookService_FindAllBooksServer) error {
+	books, err := s.repo.FindAll(query)
 	if err != nil {
 		return err
 	}
@@ -29,6 +29,3 @@ func (s *Server) FindAllBooks(in *books.BookCollectionQuery, stream books.BookSe
 	return nil
 }
 
-func (s *Server) AddBook(ctx context.Context, new *books.Book) (*books.Book, error) {
-	return s.repo.Create(new)
-}

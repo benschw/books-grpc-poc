@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"github.com/benschw/books-grpc-poc/internal/app"
 	"github.com/benschw/books-grpc-poc/internal/fakes"
 	"github.com/benschw/books-grpc-poc/pkg/pb/books"
@@ -9,15 +10,16 @@ import (
 	"net"
 )
 
+var (
+	addr = flag.String("addr", "localhost:9000", "The server address in the format of host:port")
+)
+
 func main() {
-	//repo, err := postgres.NewRepo(os.Getenv("DATABASE_URL"))
-	//if err != nil {
-	//	fmt.Fprintf(os.Stderr, "Unable to connection to database: %v\n", err)
-	//	os.Exit(1)
-	//}
+	flag.Parse()
+
 	repo := fakes.NewRepo()
 
-	lis, err := net.Listen("tcp", ":9000")
+	lis, err := net.Listen("tcp", *addr)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
