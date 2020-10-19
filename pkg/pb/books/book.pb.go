@@ -139,6 +139,53 @@ func (x *BookQuery) GetAuthor() string {
 	return ""
 }
 
+type BulkResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Reply string `protobuf:"bytes,1,opt,name=reply,proto3" json:"reply,omitempty"`
+}
+
+func (x *BulkResponse) Reset() {
+	*x = BulkResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_pkg_pb_books_book_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BulkResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BulkResponse) ProtoMessage() {}
+
+func (x *BulkResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pkg_pb_books_book_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BulkResponse.ProtoReflect.Descriptor instead.
+func (*BulkResponse) Descriptor() ([]byte, []int) {
+	return file_pkg_pb_books_book_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *BulkResponse) GetReply() string {
+	if x != nil {
+		return x.Reply
+	}
+	return ""
+}
+
 var File_pkg_pb_books_book_proto protoreflect.FileDescriptor
 
 var file_pkg_pb_books_book_proto_rawDesc = []byte{
@@ -150,15 +197,21 @@ var file_pkg_pb_books_book_proto_rawDesc = []byte{
 	0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
 	0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x22, 0x23, 0x0a, 0x09, 0x42, 0x6f, 0x6f, 0x6b, 0x51, 0x75,
 	0x65, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x32, 0x67, 0x0a, 0x0b, 0x42,
-	0x6f, 0x6f, 0x6b, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x25, 0x0a, 0x07, 0x41, 0x64,
-	0x64, 0x42, 0x6f, 0x6f, 0x6b, 0x12, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f,
-	0x6f, 0x6b, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x22,
-	0x00, 0x12, 0x31, 0x0a, 0x0c, 0x46, 0x69, 0x6e, 0x64, 0x41, 0x6c, 0x6c, 0x42, 0x6f, 0x6f, 0x6b,
-	0x73, 0x12, 0x10, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b,
-	0x22, 0x00, 0x30, 0x01, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x22, 0x24, 0x0a, 0x0c, 0x42,
+	0x75, 0x6c, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x72,
+	0x65, 0x70, 0x6c, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x72, 0x65, 0x70, 0x6c,
+	0x79, 0x32, 0x9d, 0x01, 0x0a, 0x0b, 0x42, 0x6f, 0x6f, 0x6b, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x25, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x42, 0x6f, 0x6f, 0x6b, 0x12, 0x0b, 0x2e, 0x62,
+	0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b,
+	0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x22, 0x00, 0x12, 0x31, 0x0a, 0x0c, 0x46, 0x69, 0x6e, 0x64,
+	0x41, 0x6c, 0x6c, 0x42, 0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x10, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73,
+	0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f,
+	0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x22, 0x00, 0x30, 0x01, 0x12, 0x34, 0x0a, 0x0c, 0x42,
+	0x75, 0x6c, 0x6b, 0x41, 0x64, 0x64, 0x42, 0x6f, 0x6f, 0x6b, 0x73, 0x12, 0x0b, 0x2e, 0x62, 0x6f,
+	0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x1a, 0x13, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73,
+	0x2e, 0x42, 0x75, 0x6c, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x28,
+	0x01, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -173,18 +226,21 @@ func file_pkg_pb_books_book_proto_rawDescGZIP() []byte {
 	return file_pkg_pb_books_book_proto_rawDescData
 }
 
-var file_pkg_pb_books_book_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_pkg_pb_books_book_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_pkg_pb_books_book_proto_goTypes = []interface{}{
-	(*Book)(nil),      // 0: books.Book
-	(*BookQuery)(nil), // 1: books.BookQuery
+	(*Book)(nil),         // 0: books.Book
+	(*BookQuery)(nil),    // 1: books.BookQuery
+	(*BulkResponse)(nil), // 2: books.BulkResponse
 }
 var file_pkg_pb_books_book_proto_depIdxs = []int32{
 	0, // 0: books.BookService.AddBook:input_type -> books.Book
 	1, // 1: books.BookService.FindAllBooks:input_type -> books.BookQuery
-	0, // 2: books.BookService.AddBook:output_type -> books.Book
-	0, // 3: books.BookService.FindAllBooks:output_type -> books.Book
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 2: books.BookService.BulkAddBooks:input_type -> books.Book
+	0, // 3: books.BookService.AddBook:output_type -> books.Book
+	0, // 4: books.BookService.FindAllBooks:output_type -> books.Book
+	2, // 5: books.BookService.BulkAddBooks:output_type -> books.BulkResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -220,6 +276,18 @@ func file_pkg_pb_books_book_proto_init() {
 				return nil
 			}
 		}
+		file_pkg_pb_books_book_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BulkResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -227,7 +295,7 @@ func file_pkg_pb_books_book_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pkg_pb_books_book_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -255,6 +323,7 @@ const _ = grpc.SupportPackageIsVersion6
 type BookServiceClient interface {
 	AddBook(ctx context.Context, in *Book, opts ...grpc.CallOption) (*Book, error)
 	FindAllBooks(ctx context.Context, in *BookQuery, opts ...grpc.CallOption) (BookService_FindAllBooksClient, error)
+	BulkAddBooks(ctx context.Context, opts ...grpc.CallOption) (BookService_BulkAddBooksClient, error)
 }
 
 type bookServiceClient struct {
@@ -306,10 +375,45 @@ func (x *bookServiceFindAllBooksClient) Recv() (*Book, error) {
 	return m, nil
 }
 
+func (c *bookServiceClient) BulkAddBooks(ctx context.Context, opts ...grpc.CallOption) (BookService_BulkAddBooksClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_BookService_serviceDesc.Streams[1], "/books.BookService/BulkAddBooks", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &bookServiceBulkAddBooksClient{stream}
+	return x, nil
+}
+
+type BookService_BulkAddBooksClient interface {
+	Send(*Book) error
+	CloseAndRecv() (*BulkResponse, error)
+	grpc.ClientStream
+}
+
+type bookServiceBulkAddBooksClient struct {
+	grpc.ClientStream
+}
+
+func (x *bookServiceBulkAddBooksClient) Send(m *Book) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *bookServiceBulkAddBooksClient) CloseAndRecv() (*BulkResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(BulkResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BookServiceServer is the server API for BookService service.
 type BookServiceServer interface {
 	AddBook(context.Context, *Book) (*Book, error)
 	FindAllBooks(*BookQuery, BookService_FindAllBooksServer) error
+	BulkAddBooks(BookService_BulkAddBooksServer) error
 }
 
 // UnimplementedBookServiceServer can be embedded to have forward compatible implementations.
@@ -321,6 +425,9 @@ func (*UnimplementedBookServiceServer) AddBook(context.Context, *Book) (*Book, e
 }
 func (*UnimplementedBookServiceServer) FindAllBooks(*BookQuery, BookService_FindAllBooksServer) error {
 	return status.Errorf(codes.Unimplemented, "method FindAllBooks not implemented")
+}
+func (*UnimplementedBookServiceServer) BulkAddBooks(BookService_BulkAddBooksServer) error {
+	return status.Errorf(codes.Unimplemented, "method BulkAddBooks not implemented")
 }
 
 func RegisterBookServiceServer(s *grpc.Server, srv BookServiceServer) {
@@ -366,6 +473,32 @@ func (x *bookServiceFindAllBooksServer) Send(m *Book) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _BookService_BulkAddBooks_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(BookServiceServer).BulkAddBooks(&bookServiceBulkAddBooksServer{stream})
+}
+
+type BookService_BulkAddBooksServer interface {
+	SendAndClose(*BulkResponse) error
+	Recv() (*Book, error)
+	grpc.ServerStream
+}
+
+type bookServiceBulkAddBooksServer struct {
+	grpc.ServerStream
+}
+
+func (x *bookServiceBulkAddBooksServer) SendAndClose(m *BulkResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *bookServiceBulkAddBooksServer) Recv() (*Book, error) {
+	m := new(Book)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _BookService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "books.BookService",
 	HandlerType: (*BookServiceServer)(nil),
@@ -380,6 +513,11 @@ var _BookService_serviceDesc = grpc.ServiceDesc{
 			StreamName:    "FindAllBooks",
 			Handler:       _BookService_FindAllBooks_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "BulkAddBooks",
+			Handler:       _BookService_BulkAddBooks_Handler,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "pkg/pb/books/book.proto",

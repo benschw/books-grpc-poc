@@ -1,9 +1,11 @@
 package app
 
 import (
+	"fmt"
 	"github.com/benschw/books-grpc-poc/internal"
 	"github.com/benschw/books-grpc-poc/pkg/pb/books"
 	"golang.org/x/net/context"
+	"io"
 )
 
 type Server struct {
@@ -29,3 +31,22 @@ func (s *Server) FindAllBooks(query *books.BookQuery, stream books.BookService_F
 	return nil
 }
 
+func (s *Server) BulkAddBooks(in books.BookService_BulkAddBooksServer) error {
+	added := 0
+	for {
+		book, err := in.Recv()
+		if err == io.EOF {
+			return in.SendAndClose(&books.BulkResponse{
+				Reply: fmt.Sprintf("added %d books", added),
+			})
+		}
+		if err != nil {
+			return err
+		}
+		_, err = s.repo.Create(book)
+		if err != nil {
+			return err
+		}
+		added++
+	}
+}

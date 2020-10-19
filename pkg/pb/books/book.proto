@@ -14,8 +14,14 @@ message BookQuery {
   string author = 2;
 }
 
+message BulkResponse {
+  string reply = 1;
+}
+
 
 service BookService {
   rpc AddBook(Book) returns (Book) {}
   rpc FindAllBooks(BookQuery) returns (stream Book) {}
+  rpc BulkAddBooks(stream Book) returns (BulkResponse) {}
+
 }
