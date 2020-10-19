@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/grpc/test/bufconn"
+	"io"
 	"log"
 	"net"
 	"testing"
@@ -80,11 +81,13 @@ func TestServer_FindAllBook(t *testing.T) {
 	found, err := client.FindAllBooks(ctx, &books.BookQuery{})
 	found1, err1 := found.Recv()
 	found2, err2 := found.Recv()
-	// then
+	_, err3 := found.Recv()
 
+	// then
 	assert.Nil(t, err)
 	assert.Nil(t, err1)
 	assert.Nil(t, err2)
+	assert.Equal(t, io.EOF, err3)
 
 	er, _ := status.FromError(err);
 	assert.Equal(t, codes.OK, er.Code())
