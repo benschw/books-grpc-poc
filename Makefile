@@ -3,7 +3,7 @@ default: all
 .PHONY: build pb
 
 clean:
-	rm -rf pkg/pb/books/*.go
+	rm -rf pkg/pb/books/*.pb.go
 
 pb:
 	protoc pkg/pb/books/*.proto --go_out=plugins=grpc:pkg/pb/books
