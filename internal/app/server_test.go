@@ -84,7 +84,6 @@ func TestServer_FindAllBook(t *testing.T) {
 	_, err3 := found.Recv()
 
 	// then
-
 	assert.Nil(t, err)
 	assert.Nil(t, err1)
 	assert.Nil(t, err2)
