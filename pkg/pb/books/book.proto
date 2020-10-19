@@ -10,12 +10,7 @@ message Book {
   string author = 3;
 }
 
-message BookQuery {
-  string author = 2;
-}
-
 
 service BookService {
   rpc AddBook(Book) returns (Book) {}
-  rpc FindAllBooks(BookQuery) returns (stream Book) {}
 }

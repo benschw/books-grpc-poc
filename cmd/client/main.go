@@ -6,7 +6,6 @@ import (
 	"github.com/benschw/books-grpc-poc/pkg/pb/books"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	"io"
 	"log"
 )
 
@@ -38,11 +37,6 @@ func main() {
 			log.Fatalf("add - error adding book: %s", err)
 		}
 		break;
-	case "list":
-		if err := List(c, *author); err != nil {
-			log.Fatalf("list - error listing books: %s", err)
-		}
-		break;
 	default:
 		log.Fatalf("unknown command: %s", *cmd)
 	}
@@ -54,23 +48,5 @@ func Add(c books.BookServiceClient, author string, title string) error {
 		return err
 	}
 	fmt.Printf("Book Added: %v\n", book)
-	return nil
-}
-
-func List(c books.BookServiceClient, author string) error {
-	bookStream, err := c.FindAllBooks(context.Background(), &books.BookQuery{Author: author})
-	if err != nil {
-		return err
-	}
-	for {
-		book, err := bookStream.Recv()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return err
-		}
-		fmt.Printf("%v\n", book)
-	}
 	return nil
 }

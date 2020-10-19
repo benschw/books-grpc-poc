@@ -21,20 +21,6 @@ func NewRepo() *Repo {
 	return &Repo{i: 0, Books: []*books.Book{}}
 }
 
-// FindAll returns all books from the database, optionally filtered by author
-func (r *Repo) FindAll(query *books.BookQuery) ([]*books.Book, error) {
-	if query.Author == "" {
-		return r.Books, nil
-	}
-	matches := []*books.Book{}
-	for _, book := range r.Books {
-		if book.Author == query.Author {
-			matches = append(matches, book)
-		}
-	}
-	return matches, nil
-}
-
 // Create adds a new book to the database
 func (r *Repo) Create(book *books.Book) (*books.Book, error) {
 	r.i = r.i + 1

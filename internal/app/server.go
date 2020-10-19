@@ -18,14 +18,3 @@ func (s *Server) AddBook(ctx context.Context, new *books.Book) (*books.Book, err
 	return s.repo.Create(new)
 }
 
-func (s *Server) FindAllBooks(query *books.BookQuery, stream books.BookService_FindAllBooksServer) error {
-	books, err := s.repo.FindAll(query)
-	if err != nil {
-		return err
-	}
-	for _, book := range books {
-		stream.Send(book)
-	}
-	return nil
-}
-

@@ -92,53 +92,6 @@ func (x *Book) GetAuthor() string {
 	return ""
 }
 
-type BookQuery struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Author string `protobuf:"bytes,2,opt,name=author,proto3" json:"author,omitempty"`
-}
-
-func (x *BookQuery) Reset() {
-	*x = BookQuery{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_pkg_pb_books_book_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *BookQuery) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*BookQuery) ProtoMessage() {}
-
-func (x *BookQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_pkg_pb_books_book_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use BookQuery.ProtoReflect.Descriptor instead.
-func (*BookQuery) Descriptor() ([]byte, []int) {
-	return file_pkg_pb_books_book_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *BookQuery) GetAuthor() string {
-	if x != nil {
-		return x.Author
-	}
-	return ""
-}
-
 var File_pkg_pb_books_book_proto protoreflect.FileDescriptor
 
 var file_pkg_pb_books_book_proto_rawDesc = []byte{
@@ -148,17 +101,11 @@ var file_pkg_pb_books_book_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x69, 0x74, 0x6c,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x16,
 	0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x22, 0x23, 0x0a, 0x09, 0x42, 0x6f, 0x6f, 0x6b, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x32, 0x67, 0x0a, 0x0b, 0x42,
-	0x6f, 0x6f, 0x6b, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x25, 0x0a, 0x07, 0x41, 0x64,
-	0x64, 0x42, 0x6f, 0x6f, 0x6b, 0x12, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f,
-	0x6f, 0x6b, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x22,
-	0x00, 0x12, 0x31, 0x0a, 0x0c, 0x46, 0x69, 0x6e, 0x64, 0x41, 0x6c, 0x6c, 0x42, 0x6f, 0x6f, 0x6b,
-	0x73, 0x12, 0x10, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x1a, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b,
-	0x22, 0x00, 0x30, 0x01, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x3b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x32, 0x34, 0x0a, 0x0b, 0x42, 0x6f, 0x6f, 0x6b, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x25, 0x0a, 0x07, 0x41, 0x64, 0x64, 0x42, 0x6f, 0x6f, 0x6b,
+	0x12, 0x0b, 0x2e, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x1a, 0x0b, 0x2e,
+	0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x2e, 0x42, 0x6f, 0x6f, 0x6b, 0x22, 0x00, 0x42, 0x09, 0x5a, 0x07,
+	0x2e, 0x3b, 0x62, 0x6f, 0x6f, 0x6b, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -173,18 +120,15 @@ func file_pkg_pb_books_book_proto_rawDescGZIP() []byte {
 	return file_pkg_pb_books_book_proto_rawDescData
 }
 
-var file_pkg_pb_books_book_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_pkg_pb_books_book_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pkg_pb_books_book_proto_goTypes = []interface{}{
-	(*Book)(nil),      // 0: books.Book
-	(*BookQuery)(nil), // 1: books.BookQuery
+	(*Book)(nil), // 0: books.Book
 }
 var file_pkg_pb_books_book_proto_depIdxs = []int32{
 	0, // 0: books.BookService.AddBook:input_type -> books.Book
-	1, // 1: books.BookService.FindAllBooks:input_type -> books.BookQuery
-	0, // 2: books.BookService.AddBook:output_type -> books.Book
-	0, // 3: books.BookService.FindAllBooks:output_type -> books.Book
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	0, // 1: books.BookService.AddBook:output_type -> books.Book
+	1, // [1:2] is the sub-list for method output_type
+	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -208,18 +152,6 @@ func file_pkg_pb_books_book_proto_init() {
 				return nil
 			}
 		}
-		file_pkg_pb_books_book_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*BookQuery); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -227,7 +159,7 @@ func file_pkg_pb_books_book_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_pkg_pb_books_book_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -254,7 +186,6 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BookServiceClient interface {
 	AddBook(ctx context.Context, in *Book, opts ...grpc.CallOption) (*Book, error)
-	FindAllBooks(ctx context.Context, in *BookQuery, opts ...grpc.CallOption) (BookService_FindAllBooksClient, error)
 }
 
 type bookServiceClient struct {
@@ -274,42 +205,9 @@ func (c *bookServiceClient) AddBook(ctx context.Context, in *Book, opts ...grpc.
 	return out, nil
 }
 
-func (c *bookServiceClient) FindAllBooks(ctx context.Context, in *BookQuery, opts ...grpc.CallOption) (BookService_FindAllBooksClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_BookService_serviceDesc.Streams[0], "/books.BookService/FindAllBooks", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &bookServiceFindAllBooksClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type BookService_FindAllBooksClient interface {
-	Recv() (*Book, error)
-	grpc.ClientStream
-}
-
-type bookServiceFindAllBooksClient struct {
-	grpc.ClientStream
-}
-
-func (x *bookServiceFindAllBooksClient) Recv() (*Book, error) {
-	m := new(Book)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 // BookServiceServer is the server API for BookService service.
 type BookServiceServer interface {
 	AddBook(context.Context, *Book) (*Book, error)
-	FindAllBooks(*BookQuery, BookService_FindAllBooksServer) error
 }
 
 // UnimplementedBookServiceServer can be embedded to have forward compatible implementations.
@@ -318,9 +216,6 @@ type UnimplementedBookServiceServer struct {
 
 func (*UnimplementedBookServiceServer) AddBook(context.Context, *Book) (*Book, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBook not implemented")
-}
-func (*UnimplementedBookServiceServer) FindAllBooks(*BookQuery, BookService_FindAllBooksServer) error {
-	return status.Errorf(codes.Unimplemented, "method FindAllBooks not implemented")
 }
 
 func RegisterBookServiceServer(s *grpc.Server, srv BookServiceServer) {
@@ -345,27 +240,6 @@ func _BookService_AddBook_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BookService_FindAllBooks_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(BookQuery)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(BookServiceServer).FindAllBooks(m, &bookServiceFindAllBooksServer{stream})
-}
-
-type BookService_FindAllBooksServer interface {
-	Send(*Book) error
-	grpc.ServerStream
-}
-
-type bookServiceFindAllBooksServer struct {
-	grpc.ServerStream
-}
-
-func (x *bookServiceFindAllBooksServer) Send(m *Book) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 var _BookService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "books.BookService",
 	HandlerType: (*BookServiceServer)(nil),
@@ -375,12 +249,6 @@ var _BookService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _BookService_AddBook_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "FindAllBooks",
-			Handler:       _BookService_FindAllBooks_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "pkg/pb/books/book.proto",
 }
