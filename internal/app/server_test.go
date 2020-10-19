@@ -100,3 +100,55 @@ func TestServer_FindAllBook(t *testing.T) {
 	assert.Equal(t, book2.GetAuthor(), found2.GetAuthor())
 	assert.Equal(t, book2.GetTitle(), found2.GetTitle())
 }
+
+func TestServer_BulkAddBooks(t *testing.T) {
+	// given
+	ctx := context.Background()
+	conn := getConn(ctx)
+	defer conn.Close()
+
+	client := books.NewBookServiceClient(conn)
+
+	input := []*books.Book{
+		&books.Book{Author: "Bob Loblaw1", Title: "Law Blog1"},
+		&books.Book{Author: "Bob Loblaw2", Title: "Law Blog2"},
+		&books.Book{Author: "Bob Loblaw3", Title: "Law Blog3"},
+		&books.Book{Author: "Bob Loblaw4", Title: "Law Blog4"},
+		&books.Book{Author: "Bob Loblaw5", Title: "Law Blog5"},
+	}
+	// when
+	stream, err := client.BulkAddBooks(ctx)
+	assert.Nil(t, err)
+
+	ch := make(chan *books.Book, 2)
+
+	go func() {
+		for {
+			c, err := stream.Recv()
+			if err == io.EOF {
+				close(ch)
+				return
+			}
+			assert.Nil(t, err)
+			ch <- c
+		}
+	}()
+
+	for _, in := range(input) {
+		err = stream.Send(in)
+		assert.Nil(t, err)
+	}
+
+	err = stream.CloseSend()
+
+	// then
+
+	assert.Nil(t, err)
+	i := 0
+	for in := range ch {
+		assert.Equal(t, input[i].GetAuthor(), in.GetAuthor())
+		assert.Equal(t, input[i].GetTitle(), in.GetTitle())
+		i++
+	}
+	assert.Equal(t, len(input), i)
+}

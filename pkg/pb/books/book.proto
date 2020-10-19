@@ -18,4 +18,5 @@ message BookQuery {
 service BookService {
   rpc AddBook(Book) returns (Book) {}
   rpc FindAllBooks(BookQuery) returns (stream Book) {}
+  rpc BulkAddBooks(stream Book) returns (stream Book) {}
 }
