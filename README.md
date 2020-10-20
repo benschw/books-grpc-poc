@@ -5,7 +5,7 @@
 
 In one terminal run the server:
 
-    ./books-grpc-poc-serve
+    ./books-grpc-poc-server
 
 In another, test it out with the client:
 
@@ -15,6 +15,3 @@ In another, test it out with the client:
     ./books-grpc-poc-client -cmd add -title "Hello World 2" -author "Bob Loblaw"
     Book Added: id:2  title:"Hello World 2"  author:"Bob Loblaw"
 
-    ./books-grpc-poc-client -cmd list
-    id:1  title:"Hello World"  author:"Bob Loblaw"
-    id:2  title:"Hello World 2"  author:"Bob Loblaw"
