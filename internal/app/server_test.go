@@ -100,3 +100,50 @@ func TestServer_FindAllBook(t *testing.T) {
 	assert.Equal(t, book2.GetAuthor(), found2.GetAuthor())
 	assert.Equal(t, book2.GetTitle(), found2.GetTitle())
 }
+
+func TestServer_BulkAddBooks(t *testing.T) {
+	// given
+	ctx := context.Background()
+	conn := getConn(ctx)
+	defer conn.Close()
+
+	client := books.NewBookServiceClient(conn)
+
+	input := []*books.Book{
+		&books.Book{Author: "Bob Loblaw1", Title: "Law Blog1"},
+		&books.Book{Author: "Bob Loblaw2", Title: "Law Blog2"},
+		&books.Book{Author: "Bob Loblaw3", Title: "Law Blog3"},
+		&books.Book{Author: "Bob Loblaw4", Title: "Law Blog4"},
+		&books.Book{Author: "Bob Loblaw5", Title: "Law Blog5"},
+	}
+	// when
+	stream, err := client.BulkAddBooks(ctx)
+	assert.Nil(t, err)
+
+	for _, in := range(input) {
+		err = stream.Send(in)
+		assert.Nil(t, err)
+	}
+
+	reply, err := stream.CloseAndRecv()
+	assert.Nil(t, err)
+
+	// then
+	found, _ := client.FindAllBooks(ctx, &books.BookQuery{})
+	foundBooks := []*books.Book{}
+	for {
+		fb, err := found.Recv()
+		if err == io.EOF {
+			break
+		}
+		foundBooks = append(foundBooks, fb)
+	}
+
+	assert.Equal(t, "added 5 books", reply.GetReply())
+	assert.Equal(t, len(input), len(foundBooks))
+
+	for i, in := range(input) {
+		assert.Equal(t, in.GetAuthor(), foundBooks[i].GetAuthor())
+		assert.Equal(t, in.GetTitle(), foundBooks[i].GetTitle())
+	}
+}
