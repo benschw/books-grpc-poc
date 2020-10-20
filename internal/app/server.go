@@ -4,6 +4,7 @@ import (
 	"github.com/benschw/books-grpc-poc/internal"
 	"github.com/benschw/books-grpc-poc/pkg/pb/books"
 	"golang.org/x/net/context"
+	"io"
 )
 
 type Server struct {
@@ -29,3 +30,18 @@ func (s *Server) FindAllBooks(query *books.BookQuery, stream books.BookService_F
 	return nil
 }
 
+func (s *Server) BulkAddBooks(stream books.BookService_BulkAddBooksServer) error {
+	for {
+		in, err := stream.Recv()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			return err
+		}
+		book, err := s.repo.Create(in)
+		if err := stream.Send(book); err != nil {
+			return err
+		}
+	}
+}
