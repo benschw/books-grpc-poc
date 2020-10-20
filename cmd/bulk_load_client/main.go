@@ -44,9 +44,12 @@ func main() {
 	c := books.NewBookServiceClient(conn)
 
 	entries, err := LoadCatalog(*input)
+	if err != nil {
+		log.Fatalf("couldn't load catalog.rdf: %s", err)
+	}
 
 	if err := BulkLoad(c, entries); err != nil {
-		fmt.Errorf("%s", err)
+		log.Fatalf("problem bulk loading into books service: %s", err)
 	}
 }
 
