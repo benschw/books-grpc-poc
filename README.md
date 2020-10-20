@@ -5,7 +5,7 @@
 
 In one terminal run the server:
 
-    ./books-grpc-poc-serve
+    ./books-grpc-poc-server
 
 In another, test it out with the client:
 
